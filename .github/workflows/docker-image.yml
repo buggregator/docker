@@ -35,7 +35,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ./
-          file: ./docker/Dockerfile
+          file: ./Dockerfile
           push: true
           tags:
             ghcr.io/${{ github.repository }}:latest, ghcr.io/${{ github.repository }}:${{ steps.previoustag.outputs.tag }}
