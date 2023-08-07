@@ -23,9 +23,9 @@ RUN docker-php-ext-install \
         sockets
 
 RUN apk add --no-cache nginx
-RUN cp nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 RUN [ -d /etc/nginx/conf.d ] ||  mkdir /etc/nginx/conf.d
-RUN cp nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 
 RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
 
