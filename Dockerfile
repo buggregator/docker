@@ -1,4 +1,4 @@
-FROM php:8.1.3-cli-alpine3.15
+FROM php:8.2.13-cli-alpine3.18
 
 RUN apk add --no-cache \
         curl \
