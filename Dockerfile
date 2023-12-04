@@ -9,7 +9,8 @@ RUN apk add --no-cache \
         libxslt-dev \
         libxml2-dev \
         icu-dev \
-        zip
+        zip \
+        linux-headers
 
 RUN docker-php-ext-install \
         opcache \
@@ -22,7 +23,7 @@ RUN docker-php-ext-install \
         bcmath \
         sockets
 
-RUN apk add --no-cache nginx
+RUN apk add --no-cache
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 RUN [ -d /etc/nginx/conf.d ] ||  mkdir /etc/nginx/conf.d
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
