@@ -23,7 +23,7 @@ RUN docker-php-ext-install \
         bcmath \
         sockets
 
-RUN apk add --no-cache
+RUN apk add --no-cache nginx
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 RUN [ -d /etc/nginx/conf.d ] ||  mkdir /etc/nginx/conf.d
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
