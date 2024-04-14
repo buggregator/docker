@@ -8,12 +8,11 @@ RUN apk add --no-cache \
         libmcrypt-dev \
         libxslt-dev \
         libxml2-dev \
-        libssl-dev \
+        openssl-dev \
         icu-dev \
         zip \
         unzip \
-        linux-headers \
-        pkg-config
+        linux-headers
 
 RUN docker-php-ext-install \
         opcache \
@@ -43,7 +42,7 @@ RUN docker-php-ext-install \
         pgsql pdo_pgsql pdo_mysql
 
 # MongoDB support
-RUN pecl install zlib zip mongodb \
+RUN pecl install mongodb \
     && docker-php-ext-enable mongodb
 
 RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
