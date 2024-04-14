@@ -23,10 +23,25 @@ RUN docker-php-ext-install \
         bcmath \
         sockets
 
+# PHP settings
+RUN sed -i 's/memory_limit = 128M/memory_limit = 1024M/g' "$PHP_INI_DIR/php.ini-production" && \
+    sed -i 's/post_max_size = 8M/post_max_size = 1024M/g' "$PHP_INI_DIR/php.ini-production" && \
+    mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+
+# Nginx
 RUN apk add --no-cache nginx
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 RUN [ -d /etc/nginx/conf.d ] ||  mkdir /etc/nginx/conf.d
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+
+# PDO database drivers support
+RUN apk --no-cache add postgresql-dev
+RUN docker-php-ext-install \
+        pgsql pdo_pgsql pdo_mysql \
+
+# MongoDB support
+RUN pecl install mongodb \
+    && docker-php-ext-enable mongodb
 
 RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
 
