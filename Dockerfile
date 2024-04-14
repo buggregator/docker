@@ -37,7 +37,7 @@ COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 # PDO database drivers support
 RUN apk --no-cache add postgresql-dev
 RUN docker-php-ext-install \
-        pgsql pdo_pgsql pdo_mysql \
+        pgsql pdo_pgsql pdo_mysql
 
 # MongoDB support
 RUN pecl install mongodb \
