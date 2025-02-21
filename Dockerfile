@@ -32,7 +32,7 @@ RUN apk update && apk add --no-cache \
 
 # PHP settings
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
-  && echo "memory_limit=2048M" >> "$PHP_INI_DIR/conf.d/docker-php.ini"
+  && echo "memory_limit=2048M" >> "$PHP_INI_DIR/conf.d/docker-php.ini" \
   && echo "post_max_size=1024M" >> "$PHP_INI_DIR/conf.d/docker-php.ini"
 
 # Nginx
